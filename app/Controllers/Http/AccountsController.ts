@@ -1,11 +1,14 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Account from 'App/Models/Account'
 
 export default class AccountsController {
-  public async index() {}
+  public async index() {
+    return await Account.all()
+  }
 
   public async store({ request }: HttpContextContract) {
     const data = request.all()
-    console.log(data)
+    return await Account.create(data)
   }
 
   public async destroy({ params }: HttpContextContract) {
@@ -19,5 +22,4 @@ export default class AccountsController {
   public async update({ params }: HttpContextContract) {
     return params
   }
-
 }
