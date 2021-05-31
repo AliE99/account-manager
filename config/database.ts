@@ -43,7 +43,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
         password: Env.get('PG_PASSWORD', 477477) as string,
         database: Env.get('PG_DB_NAME', 'accounts') as string,
       },
-      healthCheck: true,
+      healthCheck: true, 
     },
 
   },
