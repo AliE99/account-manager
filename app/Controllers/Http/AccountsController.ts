@@ -8,10 +8,16 @@ export default class AccountsController {
     console.log(data)
   }
 
-  public async destroy({ params }: HttpContextContract) {}
+  public async destroy({ params }: HttpContextContract) {
+    return params
+  }
 
-  public async show({ params }: HttpContextContract) {}
+  public async show({ params }: HttpContextContract) {
+    return params
+  }
 
-  public async update({ params }: HttpContextContract) {}
+  public async update({ params }: HttpContextContract) {
+    return params
+  }
 
 }
