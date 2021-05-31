@@ -12,14 +12,15 @@ export default class AccountsController {
   }
 
   public async destroy({ params }: HttpContextContract) {
-    return params
+    const account = await Account.find(params.id)
+    account?.delete()
   }
 
   public async show({ params }: HttpContextContract) {
-    return params
+    return await Account.find(params.id)
   }
 
-  public async update({ params }: HttpContextContract) {
-    return params
+  public async update({ params, request }: HttpContextContract) {
+    await Account.query().where('id', params.id).update(request.all())
   }
 }
