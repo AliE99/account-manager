@@ -19,13 +19,20 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
+
+Route.get('health', async ({ response }) => {
+  const report = await HealthCheck.getReport()
+
+  return report.healthy ? response.ok(report) : response.badRequest(report)
+})
 
 Route.get('/', async () => {
   return { hello: 'world' }
 })
 
 Route.get('accounts', 'AccountsController.index')
-Route.get('accounts/:id','AccountsController.show')
+Route.get('accounts/:id', 'AccountsController.show')
 Route.post('accounts', 'AccountsController.store')
-Route.delete('accounts/:id','AccountsController.destroy')
-Route.put('accounts/:id','AccountsController.update')
+Route.delete('accounts/:id', 'AccountsController.destroy')
+Route.put('accounts/:id', 'AccountsController.update')
