@@ -12,7 +12,7 @@ export default class Account extends BaseModel {
   public last_name: string
 
   @column()
-  public phone_number: Number
+  public phone_number: string
 
   @column()
   public email: string
