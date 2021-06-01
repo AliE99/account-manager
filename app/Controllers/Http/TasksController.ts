@@ -3,8 +3,13 @@ import Task from 'App/Models/Task'
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
 export default class TasksController {
-  public async index() {
-    return await Task.all()
+  public async index({ request }) {
+    const search = request.qs().search
+    if (search == null) {
+      return await Task.all()
+    } else {
+      return Task.query().where('name', 'ilike', '%' + search + '%')
+    }
   }
 
   public async store({ request, response }: HttpContextContract) {
