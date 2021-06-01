@@ -31,21 +31,11 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('accounts', 'AccountsController.index')
-Route.get('accounts/:id', 'AccountsController.show')
-Route.post('accounts', 'AccountsController.store')
-Route.delete('accounts/:id', 'AccountsController.destroy')
-Route.put('accounts/:id', 'AccountsController.update')
-
-
 Route.group(() => {
-  Route.post("register", "AuthController.register");
-  Route.post("login", "AuthController.login");
+  Route.post('register', 'AuthController.register');
+  Route.post('login', 'AuthController.login');
   Route.group(() => {
-    Route.get('accounts', 'AccountsController.index');
-    Route.get('accounts/:id', 'AccountsController.show');
-    Route.post('accounts', 'AccountsController.store');
-    Route.delete('accounts/:id', 'AccountsController.destroy');
-    Route.put('accounts/:id', 'AccountsController.update');
-  }).middleware("auth:api");
-}).prefix("api");
+    Route.resource('accounts', 'AccountsController').apiOnly();
+    Route.resource('tasks', 'TasksController').apiOnly();
+  }).middleware('auth:api');
+}).prefix('api');

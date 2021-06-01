@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasMany,HasMany } from '@ioc:Adonis/Lucid/Orm'
 
 import Task from 'App/Models/Task'
-import { HasMany } from '@ioc:Adonis/Lucid/Relations'
+// import { HasMany } from '@ioc:Adonis/Lucid/Relations'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })

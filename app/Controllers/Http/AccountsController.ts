@@ -66,7 +66,7 @@ export default class AccountsController {
       const payload = await request.validate({
         schema: ValidationSchema,
       })
-      return await Boolean(Account.query().where('id', params.id).update(payload))
+      return await Account.query().where('id', params.id).update(payload)
     } catch (error) {
       response.badRequest(error.messages)
     }
