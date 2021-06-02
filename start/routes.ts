@@ -31,10 +31,12 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+
 Route.group(() => {
   Route.post('register', 'AuthController.register');
   Route.post('login', 'AuthController.login');
   Route.group(() => {
+    Route.resource('users', 'UsersController').apiOnly();
     Route.resource('accounts', 'AccountsController').apiOnly();
     Route.resource('tasks', 'TasksController').apiOnly();
   }).middleware('auth:api');

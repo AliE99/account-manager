@@ -1,12 +1,16 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Task from 'App/Models/Task'
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class TasksController {
-  public async index({ request }) {
+  public async index({ request }: HttpContextContract) {
     const search = request.qs().search
+    const page = request.qs().page || 1
+    const page_size = request.qs().page_size || 10
     if (search == null) {
-      return await Task.all()
+      const tasks = await Database.from('tasks').paginate(page, page_size)
+      return tasks.toJSON().data
     } else {
       return Task.query().where('name', 'ilike', '%' + search + '%')
     }
