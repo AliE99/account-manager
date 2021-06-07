@@ -8,8 +8,11 @@ export default class TasksController {
     const search = request.qs().search
     const page = request.qs().page || 1
     const page_size = request.qs().page_size || 10
+    const sort = request.qs().sort || 'created_at'
+    const sort_type = request.qs().sort_type || 'asc'
+
     if (search == null) {
-      const tasks = await Database.from('tasks').paginate(page, page_size)
+      const tasks = await Database.from('tasks').orderBy(sort, sort_type).paginate(page, page_size)
       return tasks.toJSON().data
     } else {
       return Task.query().where('name', 'ilike', '%' + search + '%')
